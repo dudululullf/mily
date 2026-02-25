@@ -14,6 +14,7 @@ workflows:
           echo "ANDROID_SDK_ROOT: $ANDROID_SDK_ROOT"
           echo "JAVA_HOME: $JAVA_HOME"
           echo "PATH: $PATH"
+          echo "GRADLE_VERSION: $(gradle --version 2>/dev/null || echo 'Gradle not found')"
       - name: Set up local properties
         script: |
           echo "sdk.dir=$ANDROID_SDK_ROOT" > local.properties
@@ -22,10 +23,11 @@ workflows:
         script: |
           ls -la
           ls -la app/
-      - name: Build with Gradle wrapper
+          ls -la app/src/
+      - name: Build with system Gradle
         script: |
-          # Use bash to run the script to avoid shell compatibility issues
-          bash ./gradlew clean assembleDebug --info
+          # Try using system Gradle instead of wrapper
+          gradle clean assembleDebug --stacktrace
     artifacts:
       - app/build/outputs/**/*.apk
     publishing:
