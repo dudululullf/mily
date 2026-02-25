@@ -8,8 +8,6 @@ workflows:
       vars:
         GRADLE_BUILD_FILE: app/build.gradle
         PACKAGE_NAME: com.audioplayer
-      android_signing:
-        - codemagic-android-default
     scripts:
       - name: Check environment variables
         script: |
