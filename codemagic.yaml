@@ -28,8 +28,8 @@ workflows:
         script: |
           # Use system Gradle since we don't have gradle-wrapper.jar
           echo "Building with Gradle version: $(gradle --version | head -n 2)"
-          # Try a simpler build command
-          gradle assembleDebug --no-daemon --info
+          # Get detailed error information
+          gradle assembleDebug --no-daemon --stacktrace
     artifacts:
       - app/build/outputs/**/*.apk
     publishing:
