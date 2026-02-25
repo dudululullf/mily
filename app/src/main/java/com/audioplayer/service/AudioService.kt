@@ -3,8 +3,6 @@ package com.audioplayer.service
 import android.content.Intent
 import android.os.Binder
 import android.os.IBinder
-import android.support.v4.media.session.MediaSessionCompat
-import android.support.v4.media.session.PlaybackStateCompat
 import androidx.media3.common.AudioAttributes
 import androidx.media3.common.MediaItem
 import androidx.media3.common.Player
@@ -27,7 +25,7 @@ class AudioService : MediaLibraryService() {
     private lateinit var mediaSession: MediaLibraryService.MediaLibrarySession
     private var exoPlayer: ExoPlayer? = null
     
-    private val _playbackState = MutableStateFlow(PlaybackStateCompat.STATE_NONE)
+    private val _playbackState = MutableStateFlow(0) // 0 = None, 1 = Playing, 2 = Paused, 3 = Buffering, 4 = Stopped
     val playbackState: StateFlow<Int> = _playbackState.asStateFlow()
     
     private val _currentPosition = MutableStateFlow(0L)
@@ -63,10 +61,10 @@ class AudioService : MediaLibraryService() {
         exoPlayer?.addListener(object : Player.Listener {
             override fun onPlaybackStateChanged(playbackState: Int) {
                 when (playbackState) {
-                    Player.STATE_IDLE -> _playbackState.value = PlaybackStateCompat.STATE_NONE
-                    Player.STATE_BUFFERING -> _playbackState.value = PlaybackStateCompat.STATE_BUFFERING
-                    Player.STATE_READY -> _playbackState.value = if (exoPlayer?.isPlaying == true) PlaybackStateCompat.STATE_PLAYING else PlaybackStateCompat.STATE_PAUSED
-                    Player.STATE_ENDED -> _playbackState.value = PlaybackStateCompat.STATE_STOPPED
+                    Player.STATE_IDLE -> _playbackState.value = 0 // None
+                    Player.STATE_BUFFERING -> _playbackState.value = 3 // Buffering
+                    Player.STATE_READY -> _playbackState.value = if (exoPlayer?.isPlaying == true) 1 else 2 // Playing or Paused
+                    Player.STATE_ENDED -> _playbackState.value = 4 // Stopped
                 }
             }
             

@@ -6,6 +6,7 @@ import android.net.Uri
 import androidx.media3.common.MediaItem
 import com.audioplayer.db.AudioDatabase
 import com.audioplayer.models.PlaybackProgress
+import kotlin.math.min
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -52,7 +53,7 @@ class AudioManager(private val context: Context) {
         mediaItems = mp3Files.map { MediaItem.fromUri(Uri.fromFile(it)) }
         
         if (mediaItems.isNotEmpty()) {
-            val actualStartIndex = minOf(startIndex, mediaItems.size - 1)
+            val actualStartIndex = min(startIndex, mediaItems.size - 1)
             audioService?.play(mediaItems, actualStartIndex, startPosition)
             _currentIndex.value = actualStartIndex
             _currentPosition.value = startPosition
