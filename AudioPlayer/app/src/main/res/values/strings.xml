@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Audio Player</string>
+    <string name="import_folder">导入文件夹</string>
+    <string name="edit">编辑</string>
+    <string name="done">完成</string>
+    <string name="no_playlists">暂无播放列表</string>
+    <string name="import_to_start">请点击上方按钮导入音频文件夹开始使用</string>
+    <string name="folder_not_found">文件夹已不存在</string>
+    <string name="remove_playlist">移除该列表？</string>
+    <string name="no_audio_files">该文件夹未找到音频文件</string>
+    <string name="file_missing">文件缺失，正在播放下一首</string>
+    <string name="play">播放</string>
+    <string name="pause">暂停</string>
+    <string name="previous">上一首</string>
+    <string name="next">下一首</string>
+    <string name="confirm">确定</string>
+    <string name="cancel">取消</string>
+</resources>
