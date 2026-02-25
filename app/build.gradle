@@ -55,8 +55,7 @@ dependencies {
     implementation 'androidx.room:room-ktx:2.6.1'
     kapt 'androidx.room:room-compiler:2.6.1'
     
-    // File Picker
-    implementation 'com.github.jkwiecien:EasyImage:3.3.1'
+
     
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
