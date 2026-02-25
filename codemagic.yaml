@@ -12,6 +12,9 @@ workflows:
       - name: Set up local properties
         script: |
           echo "sdk.dir=$ANDROID_SDK_ROOT" > local.properties
+      - name: Set execute permission for gradlew
+        script: |
+          chmod +x ./gradlew
       - name: Build Android app
         script: |
           ./gradlew assembleDebug
