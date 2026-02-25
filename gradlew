@@ -145,12 +145,12 @@ if [ "$cygwin" = "false" -a "$darwin" = "false" -a "$nonstop" = "false" ] ; then
       max*)
         MAX_FD=`ulimit -H -n` ||
             warn "Could not query maximum file descriptor limit"
-        ;;&
+        ;;
       '' | soft) :;; #(
       *)
         ulimit -n $MAX_FD ||
             warn "Could not set maximum file descriptor limit to $MAX_FD"
-        ;;&
+        ;;
     esac
 fi
 
