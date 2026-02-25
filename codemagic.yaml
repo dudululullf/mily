@@ -27,7 +27,9 @@ workflows:
       - name: Build with system Gradle
         script: |
           # Use system Gradle since we don't have gradle-wrapper.jar
-          gradle clean assembleDebug --stacktrace
+          echo "Building with Gradle version: $(gradle --version | head -n 2)"
+          # Try a simpler build command
+          gradle assembleDebug --no-daemon --info
     artifacts:
       - app/build/outputs/**/*.apk
     publishing:
