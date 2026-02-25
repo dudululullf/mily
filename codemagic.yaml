@@ -24,13 +24,10 @@ workflows:
           ls -la
           ls -la app/
           ls -la app/src/
-      - name: Set execute permission for gradlew
+      - name: Build with system Gradle
         script: |
-          chmod +x ./gradlew
-          ls -la ./gradlew
-      - name: Build with Gradle wrapper
-        script: |
-          ./gradlew clean assembleDebug --stacktrace
+          # Use system Gradle since we don't have gradle-wrapper.jar
+          gradle clean assembleDebug --stacktrace
     artifacts:
       - app/build/outputs/**/*.apk
     publishing:
