@@ -1,7 +1,7 @@
 workflows:
   android-app:
     name: Android App
-    max_build_duration: 60
+    max_build_duration: 120
     environment:
       groups:
         - codemagic
@@ -28,8 +28,10 @@ workflows:
         script: |
           # Use system Gradle since we don't have gradle-wrapper.jar
           echo "Building with Gradle version: $(gradle --version | head -n 2)"
-          # Get detailed error information
-          gradle assembleDebug --no-daemon --stacktrace
+          # Get detailed error information and save to file
+          gradle assembleDebug --no-daemon --stacktrace 2>&1 | tee build.log
+          echo "===== Build log tail ====="
+          tail -100 build.log
     artifacts:
       - app/build/outputs/**/*.apk
     publishing:
